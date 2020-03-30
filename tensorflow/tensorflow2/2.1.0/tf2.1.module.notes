@@ -1,0 +1,22 @@
+conda activate /opt/packages/anaconda/anaconda3-2019.10
+conda search tensorflow
+    tensorflow                     2.0.0 eigen_py27hec4e49e_0  pkgs/main
+    tensorflow                     2.0.0 eigen_py36ha83d16c_0  pkgs/main
+    tensorflow                     2.0.0 eigen_py37hce6be7f_0  pkgs/main
+    tensorflow                     2.0.0 gpu_py27hb041a2f_0  pkgs/main
+    tensorflow                     2.0.0 gpu_py36h6b29c10_0  pkgs/main
+    tensorflow                     2.0.0 gpu_py37h768510d_0  pkgs/main
+    tensorflow                     2.0.0 mkl_py27h68eb67f_0  pkgs/main
+    tensorflow                     2.0.0 mkl_py36hef7ec59_0  pkgs/main
+    tensorflow                     2.0.0 mkl_py37h66b46cc_0  pkgs/main
+    tensorflow                     2.1.0 eigen_py27h636cc2a_0  pkgs/main
+    tensorflow                     2.1.0 eigen_py36hbb90eaf_0  pkgs/main
+    tensorflow                     2.1.0 eigen_py37h1a52d58_0  pkgs/main
+    tensorflow                     2.1.0 gpu_py27h9cdf9a9_0  pkgs/main
+    tensorflow                     2.1.0 gpu_py36h2e5cdaa_0  pkgs/main
+    tensorflow                     2.1.0 gpu_py37h7a4bb67_0  pkgs/main
+    tensorflow                     2.1.0 mkl_py27h9dbd782_0  pkgs/main
+    tensorflow                     2.1.0 mkl_py36h23468d9_0  pkgs/main
+    tensorflow                     2.1.0 mkl_py37h80a91df_0  pkgs/main
+conda create --prefix /opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda tensorflow=2.1.0=gpu_py37h7a4bb67_0 python=3.7 cudatoolkit numpy tensorflow-datasets # tensorflow-gpu=2.1.0 is a cleaner way to specify the package to be GPU since the exact version number doesn't have to be specified as done in this command.
+# For the datasets usage, check https://github.com/tensorflow/datasets

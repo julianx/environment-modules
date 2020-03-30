@@ -1,0 +1,78 @@
+#%Module1.0#############################
+##
+## TensorFlow-2.1 pre-built for CPU/GPU nodes
+##
+###  "URL: https://www.psc.edu/resources/software"
+###  "Category: Machine Learning/Libraries"
+
+set _module_name [module-info name]
+set conda_home "/opt/packages/anaconda/anaconda3-2019.10"
+set tf_home "/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda"
+set tensorrt_home "/opt/packages/TensorFlow/gnu/TensorRT-7.0.0.11"
+
+ proc ModulesHelp { } {
+   global _module_name
+   global tf_home
+
+   puts stderr "The $_module_name modulefile defines a Python virtual environment that provides a build of TensorFlow r1.15 targeted for both CPU and
+GPU nodes."
+   puts stderr "It uses Anaconda with Python 3.7.7 TensorFlow 1.15 (tensorflow, tensorflow-gpu), and cuda/10.1"
+   puts stderr "Loading this module will automatically unload all modules that conflict with the above"
+   puts stderr "prerequisites for this virtual environment.\n"
+   puts stderr "To use this virtual environment, first, make sure you have requested a compute node with a GPU (or CPU) to run on, "
+   puts stderr "either via the interact command, or via the sbatch command or a SLURM batch script."
+   puts stderr "Then, load this module and activate the virtual environment, as follows:"
+   puts stderr "activate"
+ }
+
+module-whatis "TensorFlow-2.1"
+
+if { [ is-loaded pgi ] } {
+   module unload pgi
+}
+
+#Check what to do with intel
+
+if { [ is-loaded gcc ] } {
+   if { ! [ is-loaded gcc/5.3.0 ] } {
+      module switch gcc gcc/5.3.0
+   }
+} else {
+   module load gcc/5.3.0
+}
+
+if { [ is-loaded cuda ] } {
+   if { ! [ is-loaded cuda/10.1 ] } {
+      module switch cuda cuda/10.1
+   }
+} else {
+   module load cuda
+}
+
+if { [ is-loaded python2 ] } {
+   module unload python
+}
+
+if { [ is-loaded python2 ] } {
+   module unload python2
+}
+
+if { [ is-loaded python3 ] } {
+   module unload python3
+}
+
+if { [ is-loaded intelpython ] } {
+   module unload intelpython
+}
+
+setenv TF_ENV ${tf_home}
+setenv TENSORRT_ENV ${tf_home}
+
+set-alias tf_activate "conda activate ${tf_home}"
+set-alias activate "source ${conda_home}/bin/activate && tf_activate"
+
+setenv TF_ENV $tf_home
+prepend-path PATH ${tf_home}/bin
+prepend-path PATH ${conda_home}/bin
+prepend-path PYTHONPATH $tf_home/lib/python3.7/site-packages
+prepend-path LD_LIBRARY_PATH ${tensorrt_home}/lib

@@ -1,0 +1,330 @@
+juran@air19:~ (05:32 PM) $ ssh train203@bridges.psc.edu
+train203@bridges.psc.edu's password: 
+Last login: Sat Mar 28 17:31:24 2020 from c-73-117-49-173.hsd1.pa.comcast.net
+********************************* W A R N I N G ********************************
+You have connected to br005.pvt.bridges.psc.edu 
+
+This computing resource is the property of the Pittsburgh Supercomputing Center. 
+It is for authorized use only.  By using this system, all users acknowledge 
+notice of, and agree to comply with, PSC polices including the Resource Use 
+Policy, available at http://www.psc.edu/index.php/policies. Unauthorized or 
+improper use of this system may result in administrative disciplinary action, 
+civil charges/criminal penalties, and/or other sanctions as set forth in PSC 
+policies. By continuing to use this system you indicate your awareness of and 
+consent to these terms and conditions of use.
+
+LOG OFF IMMEDIATELY if you do not agree to the conditions stated in this warning
+
+ 
+
+Please contact remarks@psc.edu with any comments/concerns.
+
+********************************* W A R N I N G ********************************
+
+* * * * * * * ATTENTION * * * * * * *
+
+Due to Bridges contributing to our understanding of the COVID-19 pandemic, we
+are requesting that all Bridges RM users submit jobs with a maximum time limit
+of 12 hours. 
+
+Longer jobs are unlikely to run. Thank you for your understanding.
+
+* * * * * * * ATTENTION * * * * * * *
+
+[train203@login005 ~]$ unset HISTFILE
+[train203@login005 ~]$ interact -gpu
+
+A command prompt will appear when your session begins
+"Ctrl+d" or "exit" will end your session
+
+srun: job 8271263 queued and waiting for resources
+srun: job 8271263 has been allocated resources
+[train203@gpu047 ~]$ unset HISTFILE
+[train203@gpu047 ~]$ module use /home/julian/modules
+[train203@gpu047 ~]$ module load tensorflow/2.1_py3_conda
+[train203@gpu047 ~]$ activate
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 ~]$ cd tf1_test_urbanic/
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 tf1_test_urbanic]$ module list
+Currently Loaded Modulefiles:
+  1) psc_path/1.1               3) intel/19.5                 5) gcc/5.3.0                  7) tensorflow/2.1_py3_conda
+  2) slurm/default              4) xdusage/2.1-1              6) cuda/10.1
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 tf1_test_urbanic]$ conda list | grep tensorflow
+tensorflow                2.1.0           gpu_py37h7a4bb67_0  
+tensorflow-base           2.1.0           gpu_py37h6c5654b_0  
+tensorflow-datasets       1.2.0                    py37_0  
+tensorflow-estimator      2.1.0              pyhd54b08b_0  
+tensorflow-metadata       0.14.0             pyhe6710b0_1  
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 tf1_test_urbanic]$ which python 
+/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda/bin/python
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 tf1_test_urbanic]$ conda list | grep tensorrt
+tensorrt                  7.0.0.11                 pypi_0    pypi
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 tf1_test_urbanic]$ python
+Python 3.7.7 (default, Mar 26 2020, 15:48:22) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import tensorflow
+>>> tensorflow.__version__
+'2.1.0'
+>>> 
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 tf1_test_urbanic]$ python CNN.py 
+WARNING:tensorflow:From /opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda/lib/python3.7/site-packages/tensorflow_core/python/compat/v2_compat.py:88: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+Instructions for updating:
+non-resource variables are not supported in the long term
+WARNING:tensorflow:From CNN.py:6: read_data_sets (from input_data) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use alternatives such as: tensorflow_datasets.load('mnist')
+WARNING:tensorflow:From /home/train203/tf1_test_urbanic/input_data.py:297: _maybe_download (from input_data) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please write your own downloading logic.
+WARNING:tensorflow:From /home/train203/tf1_test_urbanic/input_data.py:299: _extract_images (from input_data) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use tf.data to implement this functionality.
+Extracting ./train-images-idx3-ubyte.gz
+WARNING:tensorflow:From /home/train203/tf1_test_urbanic/input_data.py:304: _extract_labels (from input_data) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use tf.data to implement this functionality.
+Extracting ./train-labels-idx1-ubyte.gz
+WARNING:tensorflow:From /home/train203/tf1_test_urbanic/input_data.py:112: _dense_to_one_hot (from input_data) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use tf.one_hot on tensors.
+Extracting ./t10k-images-idx3-ubyte.gz
+Extracting ./t10k-labels-idx1-ubyte.gz
+WARNING:tensorflow:From /home/train203/tf1_test_urbanic/input_data.py:328: _DataSet.__init__ (from input_data) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use alternatives such as official/mnist/_DataSet.py from tensorflow/models.
+WARNING:tensorflow:From CNN.py:31: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+2020-03-28 17:33:47.514350: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-03-28 17:33:47.528072: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2095054999 Hz
+2020-03-28 17:33:47.534112: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55ff3481acf0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-03-28 17:33:47.534138: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-03-28 17:33:47.536737: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-03-28 17:33:47.560135: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1555] Found device 0 with properties: 
+pciBusID: 0000:81:00.0 name: Tesla P100-PCIE-16GB computeCapability: 6.0
+coreClock: 1.3285GHz coreCount: 56 deviceMemorySize: 15.90GiB deviceMemoryBandwidth: 681.88GiB/s
+2020-03-28 17:33:47.560730: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.1
+2020-03-28 17:33:47.563725: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2020-03-28 17:33:47.566854: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10
+2020-03-28 17:33:47.567545: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10
+2020-03-28 17:33:47.570939: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10
+2020-03-28 17:33:47.572577: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10
+2020-03-28 17:33:47.578501: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2020-03-28 17:33:47.581109: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1697] Adding visible gpu devices: 0
+2020-03-28 17:33:47.581145: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.1
+2020-03-28 17:33:47.693422: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1096] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-03-28 17:33:47.693471: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1102]      0 
+2020-03-28 17:33:47.693488: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] 0:   N 
+2020-03-28 17:33:47.697510: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1241] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:81:00.0, compute capability: 6.0)
+2020-03-28 17:33:47.700422: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55ff353de290 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2020-03-28 17:33:47.700449: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Tesla P100-PCIE-16GB, Compute Capability 6.0
+2020-03-28 17:33:48.501032: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2020-03-28 17:33:48.729252: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+step 0, training accuracy 0.2
+step 100, training accuracy 0.82
+step 200, training accuracy 0.92
+step 300, training accuracy 0.88
+step 400, training accuracy 0.94
+step 500, training accuracy 0.98
+step 600, training accuracy 0.9
+step 700, training accuracy 0.96
+step 800, training accuracy 1
+step 900, training accuracy 0.96
+step 1000, training accuracy 0.92
+step 1100, training accuracy 1
+step 1200, training accuracy 0.98
+step 1300, training accuracy 0.98
+step 1400, training accuracy 1
+step 1500, training accuracy 1
+step 1600, training accuracy 0.94
+step 1700, training accuracy 0.92
+step 1800, training accuracy 0.96
+step 1900, training accuracy 1
+step 2000, training accuracy 0.94
+step 2100, training accuracy 0.96
+step 2200, training accuracy 0.98
+step 2300, training accuracy 0.98
+step 2400, training accuracy 0.96
+step 2500, training accuracy 0.96
+step 2600, training accuracy 0.98
+step 2700, training accuracy 0.98
+step 2800, training accuracy 0.98
+step 2900, training accuracy 1
+step 3000, training accuracy 1
+step 3100, training accuracy 0.98
+step 3200, training accuracy 1
+step 3300, training accuracy 0.96
+step 3400, training accuracy 1
+step 3500, training accuracy 0.98
+step 3600, training accuracy 1
+step 3700, training accuracy 0.98
+step 3800, training accuracy 0.96
+step 3900, training accuracy 1
+step 4000, training accuracy 0.98
+step 4100, training accuracy 1
+step 4200, training accuracy 0.98
+step 4300, training accuracy 1
+step 4400, training accuracy 1
+step 4500, training accuracy 1
+step 4600, training accuracy 0.96
+step 4700, training accuracy 1
+step 4800, training accuracy 0.98
+step 4900, training accuracy 0.98
+step 5000, training accuracy 1
+step 5100, training accuracy 1
+step 5200, training accuracy 1
+step 5300, training accuracy 0.98
+step 5400, training accuracy 1
+step 5500, training accuracy 1
+step 5600, training accuracy 0.98
+step 5700, training accuracy 0.96
+step 5800, training accuracy 0.96
+step 5900, training accuracy 1
+step 6000, training accuracy 1
+step 6100, training accuracy 1
+step 6200, training accuracy 0.98
+step 6300, training accuracy 1
+step 6400, training accuracy 0.98
+step 6500, training accuracy 1
+step 6600, training accuracy 1
+step 6700, training accuracy 0.98
+step 6800, training accuracy 1
+step 6900, training accuracy 1
+step 7000, training accuracy 0.98
+step 7100, training accuracy 0.98
+step 7200, training accuracy 1
+step 7300, training accuracy 1
+step 7400, training accuracy 0.98
+step 7500, training accuracy 1
+step 7600, training accuracy 0.98
+step 7700, training accuracy 1
+step 7800, training accuracy 0.98
+step 7900, training accuracy 1
+step 8000, training accuracy 1
+step 8100, training accuracy 0.98
+step 8200, training accuracy 0.98
+step 8300, training accuracy 1
+step 8400, training accuracy 1
+step 8500, training accuracy 1
+step 8600, training accuracy 1
+step 8700, training accuracy 0.98
+step 8800, training accuracy 0.98
+step 8900, training accuracy 1
+step 9000, training accuracy 1
+step 9100, training accuracy 0.98
+step 9200, training accuracy 1
+step 9300, training accuracy 1
+step 9400, training accuracy 1
+step 9500, training accuracy 1
+step 9600, training accuracy 0.96
+step 9700, training accuracy 1
+step 9800, training accuracy 1
+step 9900, training accuracy 1
+step 10000, training accuracy 1
+step 10100, training accuracy 0.98
+step 10200, training accuracy 0.98
+step 10300, training accuracy 1
+step 10400, training accuracy 1
+step 10500, training accuracy 1
+step 10600, training accuracy 1
+step 10700, training accuracy 1
+step 10800, training accuracy 1
+step 10900, training accuracy 1
+step 11000, training accuracy 1
+step 11100, training accuracy 1
+step 11200, training accuracy 1
+step 11300, training accuracy 1
+step 11400, training accuracy 1
+step 11500, training accuracy 1
+step 11600, training accuracy 1
+step 11700, training accuracy 1
+step 11800, training accuracy 1
+step 11900, training accuracy 1
+step 12000, training accuracy 0.98
+step 12100, training accuracy 1
+step 12200, training accuracy 1
+step 12300, training accuracy 1
+step 12400, training accuracy 1
+step 12500, training accuracy 1
+step 12600, training accuracy 1
+step 12700, training accuracy 1
+step 12800, training accuracy 1
+step 12900, training accuracy 1
+step 13000, training accuracy 0.98
+step 13100, training accuracy 1
+step 13200, training accuracy 1
+step 13300, training accuracy 0.98
+step 13400, training accuracy 1
+step 13500, training accuracy 1
+step 13600, training accuracy 0.98
+step 13700, training accuracy 1
+step 13800, training accuracy 1
+step 13900, training accuracy 0.98
+step 14000, training accuracy 1
+step 14100, training accuracy 1
+step 14200, training accuracy 0.98
+step 14300, training accuracy 1
+step 14400, training accuracy 1
+step 14500, training accuracy 1
+step 14600, training accuracy 1
+step 14700, training accuracy 1
+step 14800, training accuracy 1
+step 14900, training accuracy 1
+step 15000, training accuracy 1
+step 15100, training accuracy 1
+step 15200, training accuracy 0.98
+step 15300, training accuracy 1
+step 15400, training accuracy 0.98
+step 15500, training accuracy 1
+step 15600, training accuracy 1
+step 15700, training accuracy 1
+step 15800, training accuracy 1
+step 15900, training accuracy 1
+step 16000, training accuracy 1
+step 16100, training accuracy 1
+step 16200, training accuracy 1
+step 16300, training accuracy 1
+step 16400, training accuracy 1
+step 16500, training accuracy 1
+step 16600, training accuracy 1
+step 16700, training accuracy 0.98
+step 16800, training accuracy 1
+step 16900, training accuracy 1
+step 17000, training accuracy 1
+step 17100, training accuracy 1
+step 17200, training accuracy 1
+step 17300, training accuracy 1
+step 17400, training accuracy 1
+step 17500, training accuracy 1
+step 17600, training accuracy 0.98
+step 17700, training accuracy 1
+step 17800, training accuracy 1
+step 17900, training accuracy 1
+step 18000, training accuracy 1
+step 18100, training accuracy 1
+step 18200, training accuracy 1
+step 18300, training accuracy 1
+step 18400, training accuracy 0.98
+step 18500, training accuracy 1
+step 18600, training accuracy 1
+step 18700, training accuracy 1
+step 18800, training accuracy 1
+step 18900, training accuracy 1
+step 19000, training accuracy 1
+step 19100, training accuracy 1
+step 19200, training accuracy 1
+step 19300, training accuracy 1
+step 19400, training accuracy 1
+step 19500, training accuracy 1
+step 19600, training accuracy 1
+step 19700, training accuracy 1
+step 19800, training accuracy 1
+step 19900, training accuracy 1
+test accuracy 0.9921
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 tf1_test_urbanic]$ cd ..
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 ~]$ rm -rf tf1_test_urbanic/
+(/opt/packages/TensorFlow/gnu/tf2.1.0_py3_conda) [train203@gpu047 ~]$ conda deactivate
+(base) [train203@gpu047 ~]$ exit
+[train203@login005 ~]$ logout
+Connection to bridges.psc.edu closed.
+juran@air19:~ (05:36 PM) $ ssh train203@bridges.psc.edu

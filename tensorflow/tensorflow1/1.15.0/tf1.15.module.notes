@@ -1,0 +1,33 @@
+conda create --prefix /opt/packages/TensorFlow/gnu/tf1.8_py3_gpu_conda
+
+Common errors:
+    $ conda activate
+    Traceback (most recent call last):
+    File "/opt/packages/anaconda/anaconda3/bin/conda", line 12, in <module>
+        from conda.cli import main
+    ImportError: cannot import name 'main'
+    # Solution 1: initialize conda and try activating it once again.
+    # Solution 2: activate an existing conda environment and switch to this one.
+    # Solution 3: do a source activate /full/path to get this env working without other steps.
+
+# .bash_aliases
+    function set_conda_env {
+            # >>> conda initialize >>>
+            # !! Contents within this block are managed by 'conda init' !!
+            __conda_setup="$('/opt/packages/anaconda/anaconda3-2019.10/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+            if [ $? -eq 0 ]; then
+                    eval "$__conda_setup"
+            else
+                    if [ -f "/opt/packages/anaconda/anaconda3-2019.10/etc/profile.d/conda.sh" ]; then
+                            . "/opt/packages/anaconda/anaconda3-2019.10/etc/profile.d/conda.sh"
+                    else
+                            export PATH="/opt/packages/anaconda/anaconda3-2019.10/bin:$PATH"
+                    fi
+            fi
+            unset __conda_setup
+            # <<< conda initialize <<<
+    }
+    alias iniconda=set_conda_env
+
+# .bashrc
+    source ~/.bash_aliases
